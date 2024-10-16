@@ -1,0 +1,58 @@
+version: '3'
+services:
+  my-app:
+    image: omaraboarab/project:1.0
+    ports:
+      - 3000:3000
+    depends_on:
+      - db-setup
+
+  mongodb:
+    image: mongo
+    ports:
+      - 27017:27017
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_ROOT_PASSWORD=password
+    # volumes:
+    #   - mongo-data:/data/db
+    # networks:
+    #   - app-network
+
+
+  mongo-express:
+    image: mongo-express
+    restart: always
+    ports:
+      - 8081:8081
+    environment:
+      - ME_CONFIG_MONGODB_ADMINUSERNAME=admin
+      - ME_CONFIG_MONGODB_ADMINPASSWORD=password
+      - ME_CONFIG_MONGODB_SERVER=mongodb
+    depends_on:
+      - mongodb
+    # networks:
+    #   - app-network
+  db-setup:
+    image: omaraboarab/setup-db:2.0
+    depends_on:
+      - mongodb
+
+
+
+  # db-setup:
+  #   build: 
+  #     context: ./app 
+  #     dockerfile: Dockerfile
+  #   depends_on:
+  #     - mongodb
+    # networks:
+    #   - app-network
+
+# volumes:
+#   mongo-data:
+#     driver: local
+
+# networks:
+#   app-network:
+#   driver: bridge

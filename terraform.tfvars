@@ -1,0 +1,8 @@
+envi= "Dev"
+vpc_cidr_block="10.0.0.0/16"
+subnet_cidr_block="10.0.0.0/24"
+avil_zone= "us-east-1b"
+my_ip = "41.237.156.227/32"
+instance_type = "t2.small"
+public_key_location = "~/.ssh/id_rsa.pub"
+#private_key_loc= "~/.ssh/id_rsa"
