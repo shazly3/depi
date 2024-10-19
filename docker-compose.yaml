@@ -1,7 +1,7 @@
 version: '3'
 services:
   my-app:
-    image: omaraboarab/project:1.0
+    image: shazly3/webapp:latest
     ports:
       - 3000:3000
     depends_on:
@@ -14,10 +14,7 @@ services:
     environment:
       - MONGO_INITDB_ROOT_USERNAME=admin
       - MONGO_INITDB_ROOT_PASSWORD=password
-    # volumes:
-    #   - mongo-data:/data/db
-    # networks:
-    #   - app-network
+
 
 
   mongo-express:
@@ -31,28 +28,8 @@ services:
       - ME_CONFIG_MONGODB_SERVER=mongodb
     depends_on:
       - mongodb
-    # networks:
-    #   - app-network
+ 
   db-setup:
     image: omaraboarab/setup-db:2.0
     depends_on:
       - mongodb
-
-
-
-  # db-setup:
-  #   build: 
-  #     context: ./app 
-  #     dockerfile: Dockerfile
-  #   depends_on:
-  #     - mongodb
-    # networks:
-    #   - app-network
-
-# volumes:
-#   mongo-data:
-#     driver: local
-
-# networks:
-#   app-network:
-#   driver: bridge

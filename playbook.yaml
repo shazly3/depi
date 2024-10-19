@@ -1,0 +1,15 @@
+---
+- hosts: all
+  tasks:
+
+    - name: Copy docker-compose.yaml to the remote machine
+      copy:
+        src: .
+        dest: /home/ec2-user/docker-compose.yaml
+    
+    - name: Run Docker Compose
+      command: docker-compose up -d
+      args:
+        chdir: /home/ec2-user/docker-compose.yaml  # Update this with the correct path
+
+    
